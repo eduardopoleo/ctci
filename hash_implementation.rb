@@ -4,6 +4,8 @@
 # -> when looking up the
 
 class MyHash
+  STORAGE_SIZE = 100
+
   def initialize
     @buckets = []
   end
@@ -35,7 +37,8 @@ class MyHash
 
   def map_key_to_index(k)
     hash_code = k.to_sym.object_id
-    index = hash_code % 100
+    # ensures that the the index will be within the size of the storage (Division method)
+    index = hash_code % STORAGE_SIZE
   end
 
   def find_or_initialize_bucket(index)

@@ -56,8 +56,7 @@ def is_unique?(word)
 
   # if space usage is an issue we can even use bit vector of size 128 with 1 and 0
 
-  ### Improved version 3 ####
-  #
+  ### Using bitmaps ####
 
 end
 

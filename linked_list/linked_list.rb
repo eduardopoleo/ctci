@@ -1,5 +1,5 @@
 class Node
-  attr_accessor :id, :next
+  attr_reader :id, :next
 
   def initialize(id)
     @id = id

@@ -4,7 +4,6 @@ require_relative './linked_list'
 # node implementation
 
 list = LinkedList.new('A1')
-
 list.append_to_tail('A2')
 list.append_to_tail('A3')
 list.append_to_tail('A4')
@@ -17,7 +16,7 @@ list.append_to_tail('B4')
 def weaving(list)
   slow_head = list.head
   fast_head = list.head.next
-  # pointer 1
+
   while fast_head.next != nil
     slow_head = slow_head.next
     fast_head = fast_head.next.next
@@ -27,7 +26,10 @@ def weaving(list)
 
   while slow_head.next != nil
     slow_head = slow_head.next
-    old_next = fast_head.next.dup
+    old_next = fast_head.next
+    # We need to dup here otherwise new_next and slow_head will point to the
+    # same memory adress. doing new_next.append(old_next) will cause
+    # slow_head.append(old_next) as well which is weird
     new_next = slow_head.dup
 
     fast_head.append(new_next)

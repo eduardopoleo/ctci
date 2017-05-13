@@ -1,5 +1,5 @@
 class Node
-  attr_reader :id, :next
+  attr_accessor :id, :next
 
   def initialize(id)
     @id = id
@@ -14,8 +14,8 @@ end
 class LinkedList
   attr_accessor :head
 
-  def initialize(head)
-    @head = head
+  def initialize(id)
+    @head = Node.new(id)
   end
 
   def append_to_tail(id)
@@ -55,7 +55,6 @@ class LinkedList
 
     while current.next != nil
       current = current.next
-
       s << " #{current.id}"
     end
 
@@ -63,12 +62,10 @@ class LinkedList
   end
 end
 
-node1 = Node.new(1)
-
-list = LinkedList.new(node1)
-list.append_to_tail(2)
-list.append_to_tail(3)
-list.append_to_tail(4)
-# list.remove(3)
-
-list.to_s
+# list = LinkedList.new(1)
+# list.append_to_tail(2)
+# list.append_to_tail(3)
+# list.append_to_tail(4)
+# # list.remove(3)
+#
+# list.to_s

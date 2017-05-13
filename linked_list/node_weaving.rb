@@ -24,21 +24,17 @@ def weaving(list)
   end
 
   fast_head = list.head
-  slow_head = slow_head.next
 
   while slow_head.next != nil
+    slow_head = slow_head.next
     old_next = fast_head.next.dup
     new_next = slow_head.dup
 
     fast_head.append(new_next)
-    new_next.append(old_next)
+    new_next.append(old_next) unless slow_head.next == nil
 
-    slow_head = slow_head.next
     fast_head = old_next
   end
-
-  final_next = slow_head
-  fast_head.append(final_next)
 
   list
 end

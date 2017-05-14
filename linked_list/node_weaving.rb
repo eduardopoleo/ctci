@@ -7,11 +7,13 @@ list = LinkedList.new('A1')
 list.append_to_tail('A2')
 list.append_to_tail('A3')
 list.append_to_tail('A4')
+list.append_to_tail('A5')
 
 list.append_to_tail('B1')
 list.append_to_tail('B2')
 list.append_to_tail('B3')
 list.append_to_tail('B4')
+list.append_to_tail('B5')
 
 def weaving(list)
   slow_head = list.head

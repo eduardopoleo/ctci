@@ -9,6 +9,10 @@ class Node
   def append(node)
     @next = node
   end
+
+  def sever
+    @next = nil
+  end
 end
 
 class LinkedList
@@ -18,8 +22,8 @@ class LinkedList
     @head = Node.new(id)
   end
 
-  def append_to_tail(id)
-    last = Node.new(id)
+  def append_to_tail(id_or_node)
+    last = id_or_node.is_a?(Fixnum) ? Node.new(id_or_node) : id_or_node
     current = @head
 
     while current.next != nil

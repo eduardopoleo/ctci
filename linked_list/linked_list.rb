@@ -18,11 +18,23 @@ end
 class LinkedList
   attr_accessor :head
 
-  def initialize(id)
-    @head = Node.new(id)
+  # This should be initialize always as nil not with a node but whatever
+  def initialize(id=nil)
+    @head = id ? Node.new(id) : nil
   end
 
+  # All this should be simplied.
+    # - Should only take nodes (maybe? it's pretty nice not having to initialize
+    # nodes all the time.
+    # - List should be initialize as nil all the time.
+  # Unfortunately my provious exercises contain a different
+
   def append_to_tail(id_or_node)
+    if !@head
+      @head = id_or_node.is_a?(Fixnum) ? Node.new(id_or_node) : id_or_node
+      return
+    end
+
     last = id_or_node.is_a?(Fixnum) ? Node.new(id_or_node) : id_or_node
     current = @head
 

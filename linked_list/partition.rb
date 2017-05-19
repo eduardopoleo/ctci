@@ -1,27 +1,64 @@
 require_relative './linked_list'
 
 def partition(list, k)
-  small_list = LinkedList.new(0)
-  big_list = LinkedList.new(1000)
+  # This is a 'stable' solution where we keep the order of the elements.
+  # gotta keep track of 2 extra lists
+  # small_list = LinkedList.new
+  # big_list = LinkedList.new
+  #
+  # current = list.head
+  #
+  # while current != nil
+  #   # I should not use dup. It's a costly operation.
+  #   # The reason I was dupping is so that I can freely iterate over the
+  #   # list. If sever the original list node I won't be able to go past
+  #   # the first node
+  #   # I get around this by keeping track of the next node so that I can
+  #   # reference to it when reassiging current.
+  #   next_node = current.next
+  #   current.sever
+  #
+  #   if current.id < k
+  #     small_list.append_to_tail(current)
+  #     # gotta keep track which is the last element appended to the small list
+  #     last_for_small = current
+  #   else
+  #     big_list.append_to_tail(current)
+  #   end
+  #
+  #   current = next_node
+  # end
+  #
+  # last_for_small.next = big_list.head
+  # small_list
 
-  current = list.head
+  ### O(N) #### Just a scan and then adds to the lists.
+  ##  But has to keep track of 2 additional lists and the end of the small list
+
+  head = list.head
+  tail = list.head
+  current = head
 
   while current != nil
-    isolated_node = current.dup
-    isolated_node.sever
+    next_node = current.next
 
     if current.id < k
-      small_list.append_to_tail(isolated_node)
-      last_for_small = isolated_node
+      current.next = head
+      head = current
     else
-      big_list.append_to_tail(isolated_node)
+      tail.next = current
+      tail = current
     end
 
-    current = current.next
+    current = next_node
   end
 
-  last_for_small.next = big_list.head
-  small_list
+  tail.next = nil
+
+  head
+
+  # It is interesting how there is no need to really use the list class
+  # having a reference to the head node it's usually good enough
 end
 
 list = LinkedList.new(3)
@@ -34,4 +71,4 @@ list.append_to_tail(1)
 
 new_list = partition(list, 5)
 
-new_list.to_s
+p new_list

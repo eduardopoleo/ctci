@@ -60,13 +60,12 @@ def sum_list(head1, head2)
 
     node = Node.new(node_id)
 
-    if !previous
-      puts 'im here'
-      previous = node
-      head = node
-    else
+    if previous
       previous.next = node
       previous = node
+    else
+      previous = node
+      head = node
     end
 
     sum = 0
@@ -78,6 +77,10 @@ def sum_list(head1, head2)
   end
 
   head
+
+  # this is a superior solution
+  # O(N of largest)
+  # Do not rely on transformations
 end
 
 node1 = Node.new(4)

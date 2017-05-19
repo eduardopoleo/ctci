@@ -5,7 +5,7 @@ class Node
     @id = id
     @next = nil
   end
-
+  # it's more convinient to just use the accesor next
   def append(node)
     @next = node
   end
@@ -14,6 +14,11 @@ class Node
     @next = nil
   end
 end
+
+# Basically the list it's just a wrapper that provides convinient methods.
+# - remove nodes
+# - append
+# but for transversing the list we just need the head node.
 
 class LinkedList
   attr_accessor :head

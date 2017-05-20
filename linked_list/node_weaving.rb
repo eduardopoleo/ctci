@@ -14,6 +14,7 @@ list.append_to_tail('B2')
 list.append_to_tail('B3')
 list.append_to_tail('B4')
 list.append_to_tail('B5')
+# list.append_to_tail('B6')
 
 def weaving(list)
   slow_head = list.head

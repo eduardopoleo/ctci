@@ -1,5 +1,11 @@
 require_relative './linked_list'
 
+# The gist is:
+# - Find if the lists intersect by assuring that the last node is the same
+# - find the difference in length
+# - cut off the longest length to be equal size as the other
+# - walk through both and stop when the nodes are the same.
+
 def intersection(head1, head2)
   length1 = 0
   length2 = 0
@@ -7,6 +13,8 @@ def intersection(head1, head2)
   current1 = head1
   current2 = head2
 
+# as oppose to calculate both simultanously just break it out into a method
+# that does each of them individually.
   while current1 != nil || current2 != nil
     length1 += 1 unless current1.nil?
     length2 += 1 unless current2.nil?
@@ -30,37 +38,26 @@ def intersection(head1, head2)
   current1 == head1
   current2 == head2
 
-  if length1 == length2
-    while current1 != nil
-      if current1.object_id == current2.object_id
-        return current1
-      end
+  longest_list = length1 > length2 ? head1 : head2
+  shortest_list = length1 < length2 ? head1 : head2
 
-      current1 = current1.next
-      current2 = current2.next
-    end
-  else
-    longest_list = length1 > length2 ? head1 : head2
-    shortest_list = length1 < length2 ? head1 : head2
+  diff = (length1 - length2).abs
+  current_long = longest_list
 
-    diff = (length1 - length2).abs
-    current_long = longest_list
+  while diff != 0
+    current_long = current_long.next
+    diff -= 1
+  end
 
-    while diff != 0
-      current_long = current_long.next
-      diff -= 1
+  current_short = shortest_list
+
+  while current_short != nil
+    if current_short.object_id == current_long.object_id
+      return current_short
     end
 
-    current_short = shortest_list
-
-    while current_short != nil
-      if current_short.object_id == current_long.object_id
-        return current_short
-      end
-
-      current_short = current_short.next
-      current_long = current_long.next
-    end
+    current_short = current_short.next
+    current_long = current_long.next
   end
 end
 

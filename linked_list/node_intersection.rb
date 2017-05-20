@@ -12,7 +12,6 @@ def intersection(head1, head2)
 
   current1 = head1
   current2 = head2
-
 # as oppose to calculate both simultanously just break it out into a method
 # that does each of them individually.
   while current1 != nil || current2 != nil

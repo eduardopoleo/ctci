@@ -1,3 +1,6 @@
+# A linkedlist is simpler than stacks an queue
+# this class will just do it
+# The main purpose of the data structure is to transverse it.
 class Node
   attr_accessor :id, :next
 
@@ -15,11 +18,12 @@ class Node
   end
 end
 
-# Basically the list it's just a wrapper that provides convinient methods.
+# Basically the list it's just a wrapper around the head
+# that provides convinient methods.
 # - remove nodes
 # - append
-# but for transversing the list we just need the head node.
-
+# - Maybe calculates the length of the lis
+# - Prints the list etc
 class LinkedList
   attr_accessor :head
 

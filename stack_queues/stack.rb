@@ -25,8 +25,12 @@ class Stack
 
   # pushes node to the top of the stack
   def push(node)
-    node.next = top
-    @top = node
+    if @top.nil?
+      @top = node
+    else
+      node.next = top
+      @top = node
+    end
   end
 
   def pop

@@ -30,12 +30,22 @@ class Queue
     item = first.data
 
     @first = first.next
+
+    if @first.nil?
+      @last = nil
+    end
+
     item
   end
 
   def add(node)
-    @last.next = node
-    @last = node
+    if first.nil?
+      @first = node
+      @last = node
+    else
+      @last.next = node
+      @last = node
+    end
   end
 
   private
@@ -44,7 +54,7 @@ class Queue
     raise 'Queue is empty' if empty?
   end
 end
-# 
+#
 # node1 = Node.new(1)
 # queue = Queue.new(node1)
 # p queue.peek

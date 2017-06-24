@@ -1,68 +1,66 @@
-require_relative './queue.rb'
-require_relative './stack.rb'
-
-# Solution array of arrays, that defeats the purpose
-# Having a marker in the array that delimits when one stack starts
-# and when the other begins
-
+# The whole purpose is to have constant time of insertion and pop
 class ThreeInOne
-  attr_reader :stacks
-  STACKS_NAMES = [:first, :second, :third]
+  attr_reader :elements, :stack_size, :sizes
 
-  def initialize
-    @stacks = [:first, :second, :third]
-    # This is weird you can actually change the value of constants without warning
-    # @stacks = STACKS_NAMES
+  def initialize(stack_size)
+    @stack_size = stack_size
+    @elements = Array.new(stack_size * 3)
+    @sizes = [0,0,0]
   end
 
-  def push(node, stack)
-    l = stacks.length
-    push_index = 0
+  def push(element, stack_number) # => [0,1,2]
+    raise 'The stack is full please try another!' if full?(stack_number)
 
-    for i in 0...l
-      if stacks[i] == stack
-        push_index = i
-        break
-      end
-    end
+    index = index(stack_number)
+    @elements[index] = element
 
-    @stacks.insert(push_index, node)
+    @sizes[stack_number] += 1
   end
 
-  def pop(stack)
-    l = stacks.length
-    stack_index = 0
+  def pop(stack_number)
+    raise 'the stack is empty there is nothing to pop' if empty?(stack_number)
 
-    for i in 0...l
-      if stacks[i] == stack
-        stack_index = i
-        break
-      end
+    pop_index = index(stack_number) - 1
+
+    element = @elements[pop_index]
+    @elements[pop_index] = nil
+    sizes[stack_number] -= 1
+
+    element
+  end
+
+  def peek(stack_number)
+    if empty?(stack_number)
+      puts 'the stack is empty there is nothing to peek'
+      return
     end
 
-    pop_index = stack_index - 1
+    peek_index = index(stack_number) - 1
+    element = @elements[peek_index]
+  end
 
-    if STACKS_NAMES.include?(stacks[pop_index])
-      raise "#{stack} is empty. Nothigh to pop"
-    end
+  private
 
-    @stacks.delete_at(pop_index)
+  def index(stack_number)
+    stack_size * stack_number + sizes[stack_number]
+  end
+
+  def full?(stack_number)
+    sizes[stack_number] == stack_size
+  end
+
+  def empty?(stack_number)
+    sizes[stack_number] == 0
   end
 end
 
-three_in_one = ThreeInOne.new
 
-node1 = Node.new(1)
-node2 = Node.new(2)
-node3 = Node.new(3)
+stacks = ThreeInOne.new(3)
 
-three_in_one.push(node1, :first)
-three_in_one.push(node2, :second)
-three_in_one.push(node3, :third)
-
-p three_in_one.stacks
-three_in_one.pop(:second)
-
-p three_in_one.stacks
-
-three_in_one.pop(:second)
+stacks.push(4, 0)
+stacks.push(3, 0)
+stacks.push(5, 0)
+stacks.push(7, 2)
+stacks.push(6, 2)
+p stacks.peek(2)
+p stacks.pop(2)

@@ -1,14 +1,14 @@
-# The whole purpose is to have constant time of insertion and pop
+# The whole purpose is to have constant time (1) of insertion and pop
 class ThreeInOne
   attr_reader :elements, :stack_size, :sizes
 
   def initialize(stack_size)
-    @stack_size = stack_size
     @elements = Array.new(stack_size * 3)
+    @stack_size = stack_size
     @sizes = [0,0,0]
   end
 
-  def push(element, stack_number) # => [0,1,2]
+  def push(element, stack_number)
     raise 'The stack is full please try another!' if full?(stack_number)
 
     index = index(stack_number)

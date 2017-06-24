@@ -39,25 +39,38 @@ def is_unique?(word)
   # Cast characters into ASCII code and store in boolean array
   # check the array
 #
-#   l = word.size
-#
-#   char_set = Array(nil) * l
-#
-#   return false if char_set.size > 128
-#
-#   for i in 0...l
-#     code = word[i].ord
-#     return false if char_set[code]
-#
-#     char_set[code] = true
-#   end
-#
-#   return true
-
-  # if space usage is an issue we can even use bit vector of size 128 with 1 and 0
+  # l = word.size
+  #
+  # char_set = Array.new(128)
+  #
+  # return false if char_set.size > 128
+  #
+  # for i in 0...l
+  #   code = word[i].ord
+  #   return false if char_set[code]
+  #
+  #   char_set[code] = true
+  # end
+  #
+  # return true
+  #
+  # # if space usage is an issue we can even use bit vector of size 128 with 1 and 0
 
   ### Using bitmaps ####
 
+  checker = 0
+  l = word.size
+
+  for i in 0...l
+    code = word[i].ord
+    if (checker & (1 << code)) > 0
+      return false
+    end
+
+    checker |= (1 << code)
+  end
+
+  return true
 end
 
-puts is_unique?("asdfghjk")
+puts is_unique?("asdfghjxcp$%%")

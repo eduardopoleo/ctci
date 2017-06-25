@@ -18,11 +18,6 @@ class Stack
   # the top= only works from outside the instance inside I'm still required to
   # use it
   attr_accessor :top
-
-  def initialize(top)
-    @top = top
-  end
-
   # pushes node to the top of the stack
   def push(node)
     if @top.nil?
@@ -39,7 +34,7 @@ class Stack
     popped = top
     @top = top.next
     popped.next = nil
-    popped.data
+    popped
   end
 
   def empty?
@@ -47,7 +42,7 @@ class Stack
   end
 
   def peek
-    top.data
+    top
   end
 end
 

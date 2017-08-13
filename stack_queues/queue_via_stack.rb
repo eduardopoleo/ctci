@@ -1,6 +1,5 @@
 require_relative './stack'
 
-
 class MyQueue
   attr_reader :newest, :oldest
 

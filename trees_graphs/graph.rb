@@ -3,11 +3,12 @@ class Graph
 end
 
 class Node
-  attr_accessor :adjacent, :visited
+  attr_accessor :adjacent, :visited, :marked
 
   def initialize(value)
     @value = value
-    @visited = false
+    @visited = false # dfs
+    @marked = false # bfs
     @adjacent = []
   end
 
@@ -16,22 +17,28 @@ class Node
   end
 end
 
-
 class SimpleGraph
+  attr_reader :root, :node1, :node2, :node3, :node4, :node5
+
   def self.create
-    node0 = Node.new(0)
-    node1 = Node.new(1)
-    node2 = Node.new(2)
-    node3 = Node.new(3)
-    node4 = Node.new(4)
-    node5 = Node.new(5)
+    new.create
+  end
 
+  def initialize
+    @root = Node.new(0)
+    @node1 = Node.new(1)
+    @node2 = Node.new(2)
+    @node3 = Node.new(3)
+    @node4 = Node.new(4)
+    @node5 = Node.new(5)
+  end
 
-    node0.adjacent = [node1, node4, node5]
+  def create
+    root.adjacent = [node1, node4, node5]
     node1.adjacent = [node3, node4]
     node3.adjacent = [node2, node4]
     node2.adjacent = [node1]
 
-    node0
+    self
   end
 end

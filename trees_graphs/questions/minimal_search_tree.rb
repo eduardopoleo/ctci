@@ -34,3 +34,4 @@ in_order_transversal(root)
 # fill left branch
   # move backwars from the array and add 2 nodes
 # fill rigth branch
+# NOTE: very similar to merge sort Algorithms week1.

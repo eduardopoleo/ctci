@@ -1,5 +1,6 @@
 class Node
   attr_accessor :left, :right
+  attr_reader :value
 
   def initialize(value)
     @value = value
@@ -10,6 +11,7 @@ class Node
   end
 end
 
+# perfect binarty tree p.102
 class SimpleTree
   def self.create
     root = Node.new(10)

@@ -62,7 +62,6 @@ p in_order_search2(root_binary)
 ## Aproach 3 using the binary search tre definition min/max
 # n.left.value < n.value < n.right.value
 
-
 def in_order_search3(node, max, min)
   return true if node == nil
 

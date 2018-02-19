@@ -34,3 +34,24 @@ class SimpleTree
     root
   end
 end
+
+class BinarySearchTree
+  def self.create
+    root = Node.new(8)
+    node4 = Node.new(4)
+    node2 = Node.new(2)
+    node6 = Node.new(6)
+    node10 = Node.new(10)
+    node20 = Node.new(20)
+
+    root.left = node4
+    root.right = node10
+
+    node4.left = node2
+    node4.right = node6
+
+    node10.right = node20
+
+    root
+  end
+end
